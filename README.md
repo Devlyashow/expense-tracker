@@ -14,7 +14,17 @@
 
 ## 🛠 Tech Stack
 
-\
+<p>
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
+  <img src="https://img.shields.io/badge/TypeScript-1E293B?style=for-the-badge&logo=typescript&logoColor=3178C6" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Vite-1E293B?style=for-the-badge&logo=vite&logoColor=646CFF" alt="Vite" />
+  <img src="https://img.shields.io/badge/Supabase-1E293B?style=for-the-badge&logo=supabase&logoColor=3ECF8E" alt="Supabase" />
+  <img src="https://img.shields.io/badge/React_Router-1E293B?style=for-the-badge&logo=reactrouter&logoColor=CA4245" alt="React Router" />
+  <img src="https://img.shields.io/badge/Recharts-1E293B?style=for-the-badge&logo=chartdotjs&logoColor=FF6384" alt="Recharts" />
+  <img src="https://img.shields.io/badge/Vercel-1E293B?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" />
+</p>
+
+---
 
 ---
 
