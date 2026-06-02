@@ -1,0 +1,609 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  padding-top: 90px;
+  padding-bottom: 80px;
+}
+
+.nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: #333333;
+  padding: 0;
+}
+
+.nav nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  padding: 20px 0;
+  margin: 0;
+}
+
+.help {
+  font-size: small;
+  font-style: italic;
+  color: rgb(255, 225, 91);
+}
+.help:hover {
+  cursor: default;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.plus {
+
+  color: rgb(0, 255, 0);
+  list-style-type: none;
+}
+
+.minus {
+  color: red;
+  list-style-type: none;
+}
+
+.category {
+  color: black;
+  background-color: rgba(255, 255, 255, 0.432);
+  border-radius: 7%;
+  padding: 2px;
+  width: fit-content;
+  margin-bottom: 2px;
+  margin-top: 15px;
+}
+
+.transaction-title {
+  margin: 0;
+  padding: 15px 0 0 15px;
+}
+
+.categorytext {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.form-control label {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.hint {
+  margin: 0 0 10px 0;
+  font-size: 12px;
+  text-align: center;
+  max-width: 320px;
+}
+
+.error {
+  text-decoration: underline;
+  font-size: small;
+  font-style: oblique;
+  color: rgb(255, 91, 91);
+}
+
+.filteredBalance {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+}
+
+.filteredBalance h3 {
+  display: inline;
+  margin-right: 10px;
+} 
+.filteredBalance p {
+  display: inline;
+  font-weight: normal;
+  font-style: oblique;
+  margin-top: 21px;
+  margin-left: 10px;
+} 
+
+.category-name {
+  border: solid 1px rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: min-content;
+  margin-top: 20px;
+  padding: 0 5px 0 5px;
+}
+.category-name p {
+  margin: 0;
+}
+
+.results-count {
+  border: 1px solid white;
+  width: fit-content;
+  padding: 5px;
+  margin: auto;
+  font-size: small;
+  margin-bottom: 15px;
+}
+
+.filters-clear {
+  background-color: #555555;
+  border: 2px solid black;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.24);
+  margin-bottom: 20px;
+  
+}
+
+.addTestTransaction {
+  background-color: #555555;
+  border: 2px solid rgb(0, 0, 0);
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.24);
+  display: block;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.activeNavLink {
+  color: rgb(255, 255, 255);
+}
+
+.buttonHomePage {
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+.buttonHomePage:hover {
+  border-color: #646cff;
+  color: white;
+}
+.buttonHomePage:focus,
+.buttonHomePage:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.ulAboutPage {
+  margin: auto;
+  width: fit-content;
+  margin-bottom: 20px;
+  }
+.liAboutPage {
+  width: fit-content;
+}
+
+.aboutPageButtons{
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.homePage_Expenses-Income {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.categoryPage_income-expense {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.categoryPage_income-expense p {
+  box-shadow: 2px 2px 2px 2px rgb(0, 0, 0);
+  background-color: #555555;
+  padding: 2px;
+  font-size: 12px;
+}
+.categoryPage_card {
+  display: flex;
+  margin-left: auto;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  align-items: center;
+  height: fit-content;
+}
+.categoryPage_card_name-delete {
+  display: flex;
+  align-items: center;
+  height: fit-content;
+}
+.categoryPage_card_income{
+  justify-content: space-between;
+}
+.categoryPage_card button {
+  height: fit-content;
+  border-radius: 0;
+  box-shadow: 2px 2px 2px 2px black;
+  padding: 5px;
+  font-size: small;
+}
+.categoryPage_income_label {
+  font-weight: 700;
+  color: rgb(0, 170, 0);
+}
+
+.categoryPage_expense_label {
+  font-weight: 700;
+  color: red;
+}
+
+.categoryPage_income {
+  border: 1px solid white;
+  padding: 10px;
+  width: 50%;
+  box-shadow: 2px 2px 2px 2px rgb(58, 58, 58);
+}
+.categoryPage_expense{
+  border: 1px solid white;
+  padding: 10px;
+  width: 50%;
+  box-shadow: 2px 2px 2px 2px rgb(58, 58, 58);
+}
+
+
+
+.incomeOrExpense {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.incomeOrExpense {
+  margin-bottom: 20px;
+}
+
+.categoryPage_expense_help {
+  font-size: small;
+  font-style: italic;
+}
+
+.edit-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.edit-btn {
+  border-radius: 50%;
+  padding: 0;
+  width: 25px;
+  height: 25px;
+  margin: 5px;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.transaction_amount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-btn {
+  width: 25px;
+  height: 25px;
+  margin-left: 10px;
+  padding: 8px 0 12px 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  line-height: 25px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-family: inherit;
+  vertical-align: middle;
+}
+
+.changeTransaction_form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+/* Стили для столбцов транзакций */
+.transactions-columns {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.transactions-income {
+  border: 1px solid white;
+  padding: 10px;
+  width: 50%;
+  box-shadow: 2px 2px 2px 2px rgb(58, 58, 58);
+  
+}
+
+.transactions-expense {
+  border: 1px solid white;
+  padding: 10px;
+  width: 50%;
+  box-shadow: 2px 2px 2px 2px rgb(58, 58, 58);
+}
+
+.transaction-title{
+  padding: 3px;
+}
+
+.categorytext {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+.transaction_amount{
+  justify-content: space-between;
+  align-items: center
+}
+.category {
+  max-width: min-content;
+  padding: 3px;
+  font-size: small;
+  display: flex;
+  align-items: center
+}
+
+.plus {
+  border: 1px solid white;
+  padding: 5px;
+  margin-bottom: 5px;
+  color: white;
+  background-color: rgba(0, 170, 0, 0.6);
+  box-shadow: 1px 1px 1px 1px black;
+}
+
+.minus {
+  border: 1px solid white;
+  padding: 5px;
+  margin-bottom: 5px;
+  box-shadow: 1px 1px 1px 1px black;
+  color: white;
+  background-color: rgba(255, 0, 0, 0.6);
+
+}
+
+.changeTransaction_form button {
+  margin-top: 20px;
+}
+
+.card {
+  padding: 2em;
+}
+
+/* Стили для блока баланса */
+.balance-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  margin: 20px auto;
+  border: 1px solid white;
+  box-shadow: 2px 2px 2px 2px rgb(58, 58, 58);
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.balance-total {
+  width: 100%;
+  padding: 10px 20px;
+  text-align: center;
+  border-bottom: 1px solid white;
+}
+
+.balance-total h3 {
+  margin: 0 0 5px 0;
+  font-size: 0.95em;
+  font-weight: 600;
+}
+
+.balance-value {
+  margin: 0;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.balance-positive {
+  background-color: rgba(0, 170, 0, 0.6);
+  color: white;
+}
+
+.balance-negative {
+  background-color: rgba(255, 0, 0, 0.6);
+  color: white;
+}
+
+.balance-zero {
+  background-color: transparent;
+  color: white;
+}
+
+.balance-income-expense {
+  display: flex;
+  width: 100%;
+}
+
+.balance-income {
+  width: 50%;
+  padding: 8px 15px;
+  text-align: center;
+  background-color: rgba(0, 170, 0, 0.2);
+  border-right: 1px solid white;
+}
+
+.balance-income h4 {
+  margin: 0 0 4px 0;
+  font-size: 0.9em;
+  color: rgb(0, 170, 0);
+}
+
+.balance-expense {
+  width: 50%;
+  padding: 8px 15px;
+  text-align: center;
+  background-color: rgba(255, 0, 0, 0.2);
+}
+
+.balance-expense h4 {
+  margin: 0 0 4px 0;
+  font-size: 0.9em;
+  color: red;
+}
+
+.balance-amount {
+  margin: 0;
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+.balance-category-container {
+  width: fit-content;
+}
+
+.balance-category-name {
+  margin: 2px 0;
+  font-size: 0.9em;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Стили для страницы статистики */
+.statistics-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: stretch;
+  margin: 20px auto;
+  max-width: 1200px;
+}
+
+.chart-section {
+  position: relative;
+  width: 350px;
+  padding: 20px;
+  border: 1px solid white;
+  box-shadow: 2px 2px 2px 2px rgb(58, 58, 58);
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  
+}
+
+
+.chart-section h2 {
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 600;
+  cursor: default;
+}
+
+.chart-legend {
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  text-align: center;
+  cursor: default;
+}
+
+.chart-income .chart-legend {
+  background-color: rgba(0, 170, 0, 0.2);
+  border: 1px solid rgba(0, 170, 0, 0.3);
+}
+
+.chart-expense .chart-legend {
+  background-color: rgba(255, 0, 0, 0.2);
+  border: 1px solid rgba(255, 0, 0, 0.3);
+}
+
+.chart-legend ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  gap: 4px;
+  text-align: start;
+}
+
+.chart-legend li {
+  margin: 0;
+  white-space: nowrap;
+  
+}
+
+.legend-color {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.chart-legend-item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (max-width: 1024px) {
+  .statistics-container {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .chart-income {
+    border-right: none;
+    border-bottom: 2px solid #333333;
+  }
+}

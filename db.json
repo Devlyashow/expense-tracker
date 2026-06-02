@@ -1,0 +1,59 @@
+{
+  "categories": [
+    {
+      "id": "1",
+      "key": "salary",
+      "name": "Зарплата",
+      "type": "income"
+    },
+    {
+      "id": "2",
+      "key": "food",
+      "name": "Еда",
+      "type": "expense"
+    },
+    {
+      "key": "10748fd9-7d2a-4b11-be27-078492eeb735",
+      "name": "Халтуры",
+      "type": "income",
+      "id": "-5yUzbqYsvQ"
+    },
+    {
+      "key": "5d2e6676-c1f8-4c0a-920f-7aa6ab1583ff",
+      "name": "ЖКХ",
+      "type": "expense",
+      "id": "lmDC0UOIXZE"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "1",
+      "category": "salary",
+      "text": "Аванс",
+      "amount": 50000,
+      "date": "2026-05-27"
+    },
+    {
+      "id": "2",
+      "category": "food",
+      "text": "Продукты",
+      "amount": -1200,
+      "date": "2026-05-27"
+    },
+    {
+      "category": "10748fd9-7d2a-4b11-be27-078492eeb735",
+      "text": "УК Триал",
+      "amount": 15000,
+      "date": "2026-05-29",
+      "id": "Sy5itODoDsE"
+    },
+    {
+      "category": "5d2e6676-c1f8-4c0a-920f-7aa6ab1583ff",
+      "text": "Аренда за квартиру",
+      "amount": -15000,
+      "date": "2026-05-15",
+      "id": "o7MVh5dkqk0"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

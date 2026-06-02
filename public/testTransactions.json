@@ -1,0 +1,33 @@
+[
+    {"id": 1,
+     "category": "salary",
+     "text": "Болдер", 
+     "amount": 99000
+    },
+    {"id": 2,
+     "category": "transport",
+     "text": "Такси", 
+     "amount": -5000
+    },
+    {"id": 3,
+     "category": "sideJob",
+     "text": "Промальп", 
+     "amount": 120000
+    },
+    {"id": 4,
+     "category": "utilities",
+     "text": "Аренда квартиры", 
+     "amount": -15000
+    },
+    {"id": 5,
+     "category": "savings",
+     "text": "Накопления", 
+     "amount": -10000
+    },
+    {"id": 6,
+     "category": "salary",
+     "text": "Болдер", 
+     "amount": 99000
+    }
+]
+
