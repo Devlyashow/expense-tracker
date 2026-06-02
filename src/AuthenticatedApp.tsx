@@ -132,7 +132,7 @@ return (
       ☰
     </button>
 
-    {userEmail && <span className="nav-user-email">{userEmail}</span>}
+    
 
     <nav className={`nav-links ${isMenuOpen ? 'nav-links-open' : ''}`}>
       <NavLink to="/" end className={isActive} onClick={closeMenu}>
@@ -155,6 +155,8 @@ return (
         О приложении
       </NavLink>
 
+      {userEmail && <span className="nav-user-email">{userEmail}</span>}
+      
       <button
         type="button"
         onClick={() => {

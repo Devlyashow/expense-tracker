@@ -52,8 +52,31 @@ button {
   background-color: #333333;
   padding: 0;
 }
+.nav-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  position: relative;
+  padding: 0 16px;
+}
 
-.nav nav {
+.burger-button {
+  display: none;
+}
+
+.nav-user-email {
+  grid-column: 3;
+  justify-self: end;
+  max-width: 220px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nav .nav-links {
+  grid-column: 2;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,62 +85,79 @@ button {
   margin: 0;
 }
 
+@media (max-width: 790px) {
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+.nav-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 0 16px;
+}
+
+.burger-button {
+  display: none;
+}
+
+.nav .nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  padding: 20px 0;
+  margin: 0;
+}
+
+.nav-user-email {
+  max-width: 220px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+  .nav .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 12px;
+    right: 12px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 12px;
+    background: #333333;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+    z-index: 200;
+  }
+
+  .nav .nav-links.nav-links-open {
+    display: flex;
+  }
+
+  .nav .nav-links a,
+  .nav .nav-links button {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+
+  #root {
+    padding-top: 72px;
+  }
+}
+
 .authButtonSingIn {
   margin-right: 10px;
-}
-
-.help {
-  font-size: small;
-  font-style: italic;
-  color: rgb(255, 225, 91);
-}
-.help:hover {
-  cursor: default;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-.plus {
-
-  color: rgb(0, 255, 0);
-  list-style-type: none;
-}
-
-.minus {
-  color: red;
-  list-style-type: none;
-}
-
-.category {
-  color: black;
-  background-color: rgba(255, 255, 255, 0.432);
-  border-radius: 7%;
-  padding: 2px;
-  width: fit-content;
-  margin-bottom: 2px;
-  margin-top: 15px;
-}
-
-.transaction-title {
-  margin: 0;
-  padding: 15px 0 0 15px;
-}
-
-.categorytext {
-  display: flex;
-  text-align: center;
-  justify-content: center;
 }
 
 .form-control {
@@ -132,49 +172,11 @@ button {
   font-weight: bold;
 }
 
-.hint {
-  margin: 0 0 10px 0;
-  font-size: 12px;
-  text-align: center;
-  max-width: 320px;
-}
-
 .error {
   text-decoration: underline;
   font-size: small;
   font-style: oblique;
   color: rgb(255, 91, 91);
-}
-
-.filteredBalance {
-  display: flex;
-  margin: auto;
-  justify-content: center;
-}
-
-.filteredBalance h3 {
-  display: inline;
-  margin-right: 10px;
-} 
-.filteredBalance p {
-  display: inline;
-  font-weight: normal;
-  font-style: oblique;
-  margin-top: 21px;
-  margin-left: 10px;
-} 
-
-.category-name {
-  border: solid 1px rgb(255, 255, 255);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: min-content;
-  margin-top: 20px;
-  padding: 0 5px 0 5px;
-}
-.category-name p {
-  margin: 0;
 }
 
 .results-count {
@@ -192,15 +194,6 @@ button {
   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.24);
   margin-bottom: 20px;
   
-}
-
-.addTestTransaction {
-  background-color: #555555;
-  border: 2px solid rgb(0, 0, 0);
-  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.24);
-  display: block;
-  margin: auto;
-  margin-bottom: 20px;
 }
 
 .activeNavLink {
@@ -319,11 +312,23 @@ button {
 .incomeOrExpense {
   display: flex;
   justify-content: center;
-  text-align: center;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 20px;
 }
 
-.incomeOrExpense {
-  margin-bottom: 20px;
+.radio-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.radio-option input {
+  width: auto;
+  margin: 0;
+  cursor: pointer;
 }
 
 .categoryPage_expense_help {
@@ -331,12 +336,6 @@ button {
   font-style: italic;
 }
 
-.edit-logo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
 .edit-btn {
   border-radius: 50%;
   padding: 0;
@@ -350,12 +349,6 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-}
-
-.transaction_amount {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .delete-btn {
@@ -405,6 +398,7 @@ button {
 
 .transaction-title{
   padding: 3px;
+  margin: 0;
 }
 
 .categorytext {
@@ -414,15 +408,19 @@ button {
   margin-bottom: 5px;
 }
 .transaction_amount{
+  display: flex;
   justify-content: space-between;
-  align-items: center
+  align-items: center;
 }
 .category {
+  color: black;
+  background-color: rgba(255, 255, 255, 0.432);
+  border-radius: 7%;
   max-width: min-content;
   padding: 3px;
   font-size: small;
   display: flex;
-  align-items: center
+  align-items: center;
 }
 
 .plus {
@@ -432,6 +430,7 @@ button {
   color: white;
   background-color: rgba(0, 170, 0, 0.6);
   box-shadow: 1px 1px 1px 1px black;
+  list-style-type: none;
 }
 
 .minus {
@@ -441,15 +440,11 @@ button {
   box-shadow: 1px 1px 1px 1px black;
   color: white;
   background-color: rgba(255, 0, 0, 0.6);
-
+  list-style-type: none;
 }
 
 .changeTransaction_form button {
   margin-top: 20px;
-}
-
-.card {
-  padding: 2em;
 }
 
 /* Стили для блока баланса */
@@ -546,10 +541,6 @@ button {
   font-size: 0.9em;
   font-weight: 500;
   opacity: 0.9;
-}
-
-.read-the-docs {
-  color: #888;
 }
 
 /* Стили для страницы статистики */
@@ -680,13 +671,8 @@ button,
   max-width: 100%;
 }
 
-/* Планшеты и небольшие ноутбуки */
+/* Мобильная версия */
 @media (max-width: 900px) {
-  .nav nav {
-    gap: 12px;
-    padding: 12px 8px;
-    flex-wrap: wrap;
-  }
 
   #root {
     padding-top: 120px;
@@ -713,47 +699,77 @@ button,
 }
 
 /* Телефоны */
-@media (max-width: 768px) {
-  #root {
-    padding: 1rem;
-    padding-bottom: 64px;
-  }
-
+@media (max-width: 900px) {
   .nav {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
   }
 
-  .nav nav {
+  .nav-inner {
     display: flex;
+    justify-content: space-between;
+    min-height: 56px;
+    padding: 10px 12px;
+    gap: 12px;
+  }
+
+  .burger-button {
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    overflow-x: visible;
+    width: 42px;
+    height: 38px;
+    padding: 0;
+    font-size: 1.5rem;
+    line-height: 1;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  .nav-user-email {
+  max-width: 100%;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+  .nav .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 12px;
+    right: 12px;
+    flex-direction: column;
+    align-items: stretch;
     gap: 8px;
-    padding: 10px 8px;
+    padding: 12px;
+    background: #333333;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+    z-index: 200;
   }
 
-  .nav nav a,
-  .nav nav button,
-  .nav nav span {
-    flex: 0 1 auto;
-    white-space: nowrap;
-    font-size: 0.85rem;
+  .nav .nav-links.nav-links-open {
+    display: flex;
   }
 
-  .nav nav a,
-  .nav nav button {
-    padding: 6px 10px;
-  }
-
-  .nav nav span {
+  .nav .nav-links a,
+  .nav .nav-links button {
     width: 100%;
     text-align: center;
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    overflow: hidden;
-    text-overflow: ellipsis;
+    padding: 10px;
   }
+
+  #root {
+    padding-top: 72px;
+  }
+}
 
   .homePage_Expenses-Income,
   .categoryPage_income-expense,
@@ -820,10 +836,17 @@ button,
   .results-count {
     max-width: 100%;
   }
-}
+
 
 /* Узкие телефоны */
 @media (max-width: 480px) {
+  .incomeOrExpense {
+    gap: 12px;
+  }
+
+  .radio-option {
+    font-size: 0.95rem;
+  }
   h1 {
     font-size: 1.8rem;
   }
@@ -860,9 +883,13 @@ button,
   height: 32px;
   min-width: 32px;
   min-height: 32px;
+  margin: 5px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .edit-logo {
@@ -870,147 +897,4 @@ button,
   height: 100%;
   object-fit: contain;
   display: block;
-}
-/* ===== Burger navigation ===== */
-
-.nav-inner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.burger-button {
-  display: none;
-}
-
-.nav-user-email {
-  color: var(--text-muted);
-  font-size: 0.8rem;
-}
-
-@media (max-width: 790px) {
-  .nav {
-    position: sticky;
-    top: 0;
-  }
-
-  .nav-inner {
-    justify-content: space-between;
-    padding: 10px 12px;
-    gap: 12px;
-  }
-
-  .burger-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 38px;
-    padding: 0;
-    font-size: 1.5rem;
-    line-height: 1;
-    border-radius: 8px;
-    flex-shrink: 0;
-  }
-
-  .nav-user-email {
-    flex: 1;
-    min-width: 0;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 12px;
-    right: 12px;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-    padding: 12px;
-    background: #333333;
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
-    z-index: 200;
-  }
-
-  .nav-links-open {
-    display: flex;
-  }
-
-  .nav-links a,
-  .nav-links button {
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-  }
-
-  #root {
-    padding-top: 1rem;
-  }
-}
-/* ===== Burger navigation overrides ===== */
-
-.nav .nav-links {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
-  padding: 20px 0;
-  margin: 0;
-}
-
-@media (max-width: 790px) {
-  .nav .nav-links {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 12px;
-    right: 12px;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-    padding: 12px;
-    background: #333333;
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
-    z-index: 200;
-  }
-
-  .nav .nav-links.nav-links-open {
-    display: flex;
-  }
-
-  .nav .nav-links a,
-  .nav .nav-links button {
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-  }
-}
-
-/* ===== Fixed mobile burger navigation ===== */
-
-@media (max-width: 790px) {
-  .nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-
-  .nav-inner {
-    min-height: 56px;
-  }
-
-  #root {
-    padding-top: 72px;
-  }
 }

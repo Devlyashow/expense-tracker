@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import type { Category, CategoryFormData, CreateCategoryData, Transaction } from '../types';
 import CategoryForm from '../components/CategoryForm';
 
-
 type AddCategoryPageProps = {
   categories: Category[];
   transactions: Transaction[];
@@ -11,7 +10,6 @@ type AddCategoryPageProps = {
 }
 
 export default function AddCategoryPage({categories, transactions, deleteCategory, addCategory}:AddCategoryPageProps) {
-
     const initialData: CategoryFormData = {
         text: '',
         incomeOrExpense: null,

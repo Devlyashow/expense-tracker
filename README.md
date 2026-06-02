@@ -1,16 +1,138 @@
-# React + Vite
+Expense Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Expense Tracker — приложение для учёта доходов и расходов с авторизацией, пользовательскими категориями, фильтрацией транзакций и статистикой по периодам.
 
-Currently, two official plugins are available:
+Проект создан как учебно-портфолио приложение на React + TypeScript с подключением к Supabase.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Возможности
+Регистрация и вход пользователя через Supabase Auth
+Разделение данных по пользователям
+Защита пользовательских данных через Supabase RLS
+Создание, редактирование и удаление категорий доходов и расходов
+Защита от удаления категории, если с ней уже связаны транзакции
+Создание, редактирование и удаление транзакций
+Автоматическое определение знака суммы по типу категории
+Фильтрация транзакций по категории
+Поиск транзакций по названию
+Сортировка транзакций
+Синхронизация фильтров с URL
+Подсчёт общего баланса, доходов и расходов
+Подсчёт баланса по выбранной категории
+Страница статистики с диаграммами доходов и расходов
+Фильтрация статистики по периодам
+Адаптивная вёрстка
+Бургер-меню на мобильных устройствах
+Тёмная тема интерфейса
+Стек
+React
+TypeScript
+Vite
+React Router
+Supabase Auth
+Supabase Database
+Supabase Row Level Security
+Recharts
+CSS
+Архитектура данных
 
-## React Compiler
+В проекте используются две основные сущности:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Category
 
-## Expanding the ESLint configuration
+Категория дохода или расхода.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+type Category = {
+id: string;
+key: string;
+name: string;
+type: 'income' | 'expense';
+}
+Transaction
+
+Финансовая операция.
+
+type Transaction = {
+id: string;
+category: string;
+text: string;
+amount: number;
+date: string;
+}
+
+Связь между транзакциями и категориями построена через category.key.
+
+Данные хранятся в Supabase. Каждая запись привязана к пользователю через user_id. Доступ к данным ограничен RLS-политиками: пользователь видит и изменяет только свои категории и транзакции.
+
+Переменные окружения
+
+Для запуска проекта нужно создать файл .env в корне проекта.
+
+Пример есть в .env.example:
+
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
+
+Настоящие значения нужно взять из настроек Supabase-проекта.
+
+Установка и запуск
+
+Склонировать репозиторий:
+
+git clone <repository-url>
+
+Перейти в папку проекта:
+
+cd expense-tracker
+
+Установить зависимости:
+
+npm install
+
+Создать .env на основе .env.example и добавить Supabase URL/key.
+
+Запустить проект:
+
+npm run dev
+
+Собрать проект:
+
+npm run build
+Supabase
+
+Для работы приложения в Supabase должны быть настроены:
+
+проект Supabase
+Email provider в Authentication
+таблицы categories и transactions
+поле user_id в обеих таблицах
+RLS-политики для доступа только к своим данным
+default value auth.uid() для user_id
+Статус проекта
+
+Проект находится в альфа-версии.
+
+Уже реализованы основные возможности приложения: авторизация, приватные пользовательские данные, CRUD категорий и транзакций, фильтры, поиск, сортировка, статистика и адаптивная вёрстка.
+
+Планируемые улучшения:
+
+улучшить обработку ошибок в интерфейсе
+добавить состояния загрузки для отдельных действий
+улучшить UX формы авторизации
+добавить восстановление пароля
+добавить тесты
+подготовить production deploy
+улучшить README после публикации live demo
+Цель проекта
+
+Проект создан для практики React, TypeScript, работы с API, авторизации, базой данных и пользовательскими данными.
+
+Основной фокус — не просто интерфейс, а полный frontend-flow:
+
+работа с формами
+управление состоянием
+маршрутизация
+работа с удалённой базой
+авторизация
+защита данных пользователя
+адаптивный интерфейс
+подготовка проекта к портфолио

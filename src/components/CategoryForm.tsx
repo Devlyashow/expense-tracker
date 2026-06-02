@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type {ChangeEvent, SubmitEvent } from 'react'
 import type {CategoryFormData, CategoryFormMode, CategoryType} from '../types'
+import { useBackToLastPage } from '../hooks/useBackToLastPage';
 
 type CategoryFormProps = {
   initialData: CategoryFormData;
@@ -11,7 +12,7 @@ type CategoryFormProps = {
 
 export default function CategoryForm({initialData, mode, onSubmit, hasTransactionsWithThisCategory}:CategoryFormProps)
 {
-
+    const {backToLastPage, goToHome} = useBackToLastPage()
     const [formData, setFormData] = useState<CategoryFormData>(initialData)
     const [error, setError] = useState('')
 
@@ -68,24 +69,29 @@ export default function CategoryForm({initialData, mode, onSubmit, hasTransactio
                     />
                 </div>
                 <div className='incomeOrExpense'>
-                    <label htmlFor="income">Доходы</label>
-                    <input 
-                    id="income"
-                    type='radio' 
-                    name='incomeOrExpense' 
-                    value="income"
-                    disabled={isCategoryTypeDisabled}
-                    checked={formData.incomeOrExpense === 'income'}
-                    onChange={handleChange}></input>
-                    <label htmlFor="expense">Расходы</label>
-                    <input 
-                    id="expense"
-                    type='radio' 
-                    name='incomeOrExpense' 
-                    value="expense"
-                    disabled={isCategoryTypeDisabled}
-                    checked={formData.incomeOrExpense === 'expense'}
-                    onChange={handleChange}></input>
+                    <label htmlFor="income">
+                        Доходы
+                        <input 
+                        id="income"
+                        type='radio' 
+                        name='incomeOrExpense' 
+                        value="income"
+                        disabled={isCategoryTypeDisabled}
+                        checked={formData.incomeOrExpense === 'income'}
+                        onChange={handleChange}></input>
+                    </label>
+                    
+                    <label htmlFor="expense">
+                        Расходы
+                        <input 
+                        id="expense"
+                        type='radio' 
+                        name='incomeOrExpense' 
+                        value="expense"
+                        disabled={isCategoryTypeDisabled}
+                        checked={formData.incomeOrExpense === 'expense'}
+                        onChange={handleChange}></input>
+                        </label>
                 </div>
                 {isCategoryTypeDisabled && (
                 <p className="help">
@@ -93,8 +99,13 @@ export default function CategoryForm({initialData, mode, onSubmit, hasTransactio
                 </p>
                 )}
                 <button className='categoryPage_form_button'>{mode === 'create' ? 'Добавить категорию' : 'Обновить категорию'}</button>
-            </form>
-        {error? <p className='error'>{error}</p> : null}
+                <div className='aboutPageButtons'>
+                    <button onClick={backToLastPage}>Назад</button>
+                    <button onClick={goToHome}>На главную</button>
+                </div>
+                {error? <p className='error'>{error}</p> : null}
+                
+                </form>
         </div>
   )
 }
