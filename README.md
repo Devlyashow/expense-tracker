@@ -8,7 +8,7 @@
 
 ## 🚀 Live Demo
 
-👉 **[Открыть приложение](YOUR_VERCEL_LINK)**
+👉 **[Открыть приложение](https://expense-tracker-ashen-five-23.vercel.app/)**
 
 ---
 
