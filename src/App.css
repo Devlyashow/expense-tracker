@@ -26,6 +26,10 @@
   margin: 0;
 }
 
+.authButtonSingIn {
+  margin-right: 10px;
+}
+
 .help {
   font-size: small;
   font-style: italic;
