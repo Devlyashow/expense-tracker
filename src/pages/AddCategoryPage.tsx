@@ -96,7 +96,7 @@ return (
                         to={`/category/${categoryObj.id}/edit`}
                         className='buttonHomePage edit-btn'
                     >
-                        <img className="edit-logo" src='edit-logo.png' />
+                        <img className="edit-logo" src='/edit-logo.png' />
                     </Link>
                     </div>
                 )

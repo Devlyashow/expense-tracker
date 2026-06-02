@@ -5,13 +5,12 @@ import HomePage from './pages/HomePage'
 import AboutPage from './pages/AboutPage'
 import NotFoundPage from './pages/NotFoundPage'
 import TransactionsPage from './pages/TransactionsPage'
-import CategoryPage from './pages/CategoryPage'
 import AddCategoryPage from './pages/AddCategoryPage'
 import StatisticsPage from './pages/StatisticsPage'
 import ChangeTransaction from './pages/ChangeTransaction'
 import ChangeCategoryPage from './pages/ChangeCategoryPage'
 import TransactionsProvider from './context/TransactionsProvider'
-import {useEffect, useRef, useMemo} from "react"
+import {useEffect, useRef, useMemo, useState} from "react"
 import { Route, BrowserRouter as Router, Routes, NavLink, Navigate} from 'react-router-dom'
 import useExpenseTrackerData from './hooks/useExpenseTrackerData'
 
@@ -46,6 +45,16 @@ export default function AuthenticatedApp({
     readyTransactions,
     resetFilters,
   } = useTransactionsFilters(transactions, categories)
+
+const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+function toggleMenu() {
+  setIsMenuOpen(prev => !prev)
+}
+
+function closeMenu() {
+  setIsMenuOpen(false)
+}
 
 // ref к инпуту для фокуса на него
 const searchInputRef = useRef<HTMLInputElement | null>(null)
@@ -112,17 +121,52 @@ return (
   >
     <Router>
         <div className="nav">
-          <nav>
-            <NavLink to="/" end className={isActive}>Главная</NavLink>
-            <NavLink to="/addCategories" className={isActive}>Категории</NavLink>
-            <NavLink to="/transactions" className={isActive}>Транзакции</NavLink>
-            <NavLink to="/statistics" className={isActive}>Статистика</NavLink>
-            <NavLink to="/about" className={isActive}>О приложении</NavLink>
+  <div className="nav-inner">
+    <button
+      type="button"
+      className="burger-button"
+      onClick={toggleMenu}
+      aria-label="Открыть меню"
+      aria-expanded={isMenuOpen}
+    >
+      ☰
+    </button>
 
-            {userEmail && <span>{userEmail}</span>}
-            <button type="button" onClick={signOut}>Выйти</button>
-          </nav>
-        </div>
+    {userEmail && <span className="nav-user-email">{userEmail}</span>}
+
+    <nav className={`nav-links ${isMenuOpen ? 'nav-links-open' : ''}`}>
+      <NavLink to="/" end className={isActive} onClick={closeMenu}>
+        Главная
+      </NavLink>
+
+      <NavLink to="/addCategories" className={isActive} onClick={closeMenu}>
+        Категории
+      </NavLink>
+
+      <NavLink to="/transactions" className={isActive} onClick={closeMenu}>
+        Транзакции
+      </NavLink>
+
+      <NavLink to="/statistics" className={isActive} onClick={closeMenu}>
+        Статистика
+      </NavLink>
+
+      <NavLink to="/about" className={isActive} onClick={closeMenu}>
+        О приложении
+      </NavLink>
+
+      <button
+        type="button"
+        onClick={() => {
+          closeMenu()
+          signOut()
+        }}
+      >
+        Выйти
+      </button>
+    </nav>
+  </div>
+</div>
       {dataLoading && <p>Загрузка данных...</p>}
       {dataError && <p className="error">Ошибка загрузки данных: {dataError}</p>}
       <Routes>
@@ -159,7 +203,6 @@ return (
           categories={categories}
         />} />
         <Route path='/about' element={<AboutPage />}></Route>
-        <Route path="/categories/:categoryId" element={<CategoryPage/>}/>
         <Route path='/category/:categoryId/edit' element={<ChangeCategoryPage
         editCategory={editCategory}
         />} />

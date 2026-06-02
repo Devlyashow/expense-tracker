@@ -6,7 +6,6 @@ import {useBackToLastPage} from '../hooks/useBackToLastPage'
 export default function ChangeTransaction() {
     
     const { transactions, editTransaction } = useTransactionsContext();
-    
     const {transactionId} = useParams()
     if (!transactionId) {
         return <div>Некорректный id транзакции</div>
@@ -37,7 +36,7 @@ export default function ChangeTransaction() {
         initialData={initialData}
         mode="edit"
         onSubmit={editTransaction}
-        backToLastPage={backToLastPage}/>
+        />
         <div className='aboutPageButtons'>
             <button onClick={backToLastPage}>Назад</button>
             <button onClick={goToHome}>На главную</button>

@@ -24,7 +24,7 @@ function TransactionItem({transaction}: TransactionItemProps) {
       </div>
 
       <div className="transaction_amount">
-      <Link to={`/transaction/${id}/edit`} className='buttonHomePage edit-btn'><img className="edit-logo" src='edit-logo.png'></img></Link>
+      <Link to={`/transaction/${id}/edit`} className='buttonHomePage edit-btn'><img className="edit-logo" src='/edit-logo.png'></img></Link>
         <span>
           {amount > 0 ? "+" : ""}
           {amount}
