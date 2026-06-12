@@ -37,36 +37,48 @@ export default function AddCategoryPage({categories, transactions, deleteCategor
     
 return (
     <div>
+        <section className="category-page-header">
+            <p className="category-page-badge">Категории</p>
+
+            <h2>Управление категориями</h2>
+
+            <p>
+                Создавайте собственные категории доходов и расходов. 
+                Категории используются при добавлении транзакций и помогают точнее анализировать статистику.
+            </p>
+        </section>
         <div className='categoryPage_income-expense'>
             <div className='categoryPage_income'>
-            <label className='categoryPage_income_label'>Доходы</label>
-                {income.length === 0? <div className='categoryPage_expense_help'>Добавьте статью доходов</div> : (income.map(categoryObj => {
+                <label className='categoryPage_income_label'>Доходы</label>
+                    {income.length === 0? <div className='categoryPage_expense_help'>Добавьте статью доходов</div> : (income.map(categoryObj => {
 
-                const isCategoryUsed = hasTransactionsWithThisCategory(categoryObj.id)
+                    const isCategoryUsed = hasTransactionsWithThisCategory(categoryObj.id)
 
-                return (
-                    <div className='categoryPage_card categoryPage_card_income' key={categoryObj.key}>
-                    <div className='categoryPage_card_name-delete'>
-                        <span title={isCategoryUsed ? 'Нельзя удалить категорию, потому что с ней есть транзакции' : ''}>
-                            <button
-                                onClick={() => deleteCategory(categoryObj.id)}
-                                disabled={isCategoryUsed}
+                    return (
+                        <div className='categoryPage_card categoryPage_card_income' key={categoryObj.key}>
+                            <div className='categoryPage_card_name-delete'>
+                                <span title={isCategoryUsed ? 'Нельзя удалить категорию, потому что с ней есть транзакции' : ''}>
+                                    <button
+                                        className="category-delete-btn"
+                                        onClick={() => deleteCategory(categoryObj.id)}
+                                        disabled={isCategoryUsed}
+                                        aria-label={`Удалить категорию ${categoryObj.name}`}
+                                    >
+                                        ×
+                                    </button>
+                                </span>
+                                <p className="categoryPage_card_name">{categoryObj.name}</p>
+                            </div>
+                            <Link
+                                to={`/category/${categoryObj.id}/edit`}
+                                className='buttonHomePage edit-btn'
+                                aria-label={`Редактировать категорию ${categoryObj.name}`}
                             >
-                                X
-                            </button>
-                            </span>
-                        <p>{categoryObj.name}</p>
-                    </div>
-
-                    <Link
-                        to={`/category/${categoryObj.id}/edit`}
-                        className='buttonHomePage edit-btn'
-                    >
-                        <img className="edit-logo" src='edit-logo.png' />
-                    </Link>
-                    </div>
-                )
-                }))}        
+                                <img className="edit-logo" src='/edit-logo.png' />
+                            </Link>
+                        </div>
+                            )
+                                    }))}        
             </div>
         
             <div className='categoryPage_expense'>
@@ -77,26 +89,27 @@ return (
 
                 return (
                     <div className='categoryPage_card categoryPage_card_expense' key={categoryObj.key}>
-                    <div className='categoryPage_card_name-delete'>
-                       <span title={isCategoryUsed ? 'Нельзя удалить категорию, потому что с ней есть транзакции' : ''}>
-                            <button
-                                onClick={() => deleteCategory(categoryObj.id)}
-                                disabled={isCategoryUsed}
+                            <div className='categoryPage_card_name-delete'>
+                                <span title={isCategoryUsed ? 'Нельзя удалить категорию, потому что с ней есть транзакции' : ''}>
+                                    <button
+                                        className="category-delete-btn"
+                                        onClick={() => deleteCategory(categoryObj.id)}
+                                        disabled={isCategoryUsed}
+                                        aria-label={`Удалить категорию ${categoryObj.name}`}
+                                    >
+                                        ×
+                                    </button>
+                                </span>
+                                <p className="categoryPage_card_name">{categoryObj.name}</p>
+                            </div>
+                            <Link
+                                to={`/category/${categoryObj.id}/edit`}
+                                className='buttonHomePage edit-btn'
+                                aria-label={`Редактировать категорию ${categoryObj.name}`}
                             >
-                                X
-                            </button>
-                            </span>
-                        
-                        <p>{categoryObj.name}</p>
-                    </div>
-
-                    <Link
-                        to={`/category/${categoryObj.id}/edit`}
-                        className='buttonHomePage edit-btn'
-                    >
-                        <img className="edit-logo" src='/edit-logo.png' />
-                    </Link>
-                    </div>
+                                <img className="edit-logo" src='/edit-logo.png' />
+                            </Link>
+                        </div>
                 )
                 }))} 
             </div>

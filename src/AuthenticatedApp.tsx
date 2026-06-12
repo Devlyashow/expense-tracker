@@ -155,7 +155,7 @@ return (
         О приложении
       </NavLink>
 
-      {userEmail && <span className="nav-user-email">{userEmail}</span>}
+      {userEmail && <span className="nav-menu-email">{userEmail}</span>}
       
       <button
         type="button"
