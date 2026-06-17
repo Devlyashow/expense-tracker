@@ -12,7 +12,7 @@ type StatisticsFiltersProps = {
   setPeriodPreset: React.Dispatch<React.SetStateAction<PeriodPreset>>;
 };
 
-export default function StatisticsFilters({dateFrom, dateTo, periodPreset, error, setDateFrom, setDateTo, setPeriodPreset, title}: StatisticsFiltersProps) {
+export default function PeriodFilter({dateFrom, dateTo, periodPreset, error, setDateFrom, setDateTo, setPeriodPreset, title}: StatisticsFiltersProps) {
   return (
     <div>
 <div className="statistics-page_date-filter">

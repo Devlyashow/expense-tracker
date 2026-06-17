@@ -7,9 +7,11 @@ import TransactionSearch from "../components/TransactionSearch"
 import TransactionSort from '../components/TransactionSort'
 import sortNames from '../constants/sortNames'
 import useTransactionsUrlSync from '../hooks/useTransactionsUrlSync'
+import PeriodFilter from "../components/PeriodFilter"
 import type { Transaction, Category } from "../types"
 import type { Dispatch, SetStateAction, RefObject } from "react"
 import type { SortOption } from "../constants/sortNames"
+import type { PeriodPreset } from "../types"
 
 type TransactionsPageProps = {
 balance: number,
@@ -32,7 +34,15 @@ defaultFilters: {
   search: boolean,
   sort: boolean,
 }
-categories: Category[]
+categories: Category[],
+dateFrom: string,
+dateTo: string,
+periodPreset: PeriodPreset,
+error: string,
+title: string,
+setDateFrom: Dispatch<React.SetStateAction<string>>,
+setDateTo: Dispatch<React.SetStateAction<string>>,
+setPeriodPreset: Dispatch<React.SetStateAction<PeriodPreset>>
 }
 
 export default function TransactionsPage({
@@ -52,7 +62,16 @@ readyTransactions,
 transactions,
 searchInputRef,
 defaultFilters,
-categories}: TransactionsPageProps) {
+categories,
+dateFrom,
+dateTo,
+periodPreset,
+error,
+title,
+setDateFrom,
+setDateTo,
+setPeriodPreset
+}: TransactionsPageProps) {
 
     const { from } = useTransactionsUrlSync({
   selectedCategory,
@@ -63,17 +82,31 @@ categories}: TransactionsPageProps) {
   setSortOption,
   sortNames
 })
- 
+
+
   return (
     <div>
     {from==='home'? <p>Открыто из: главной</p> : null }
     {from==='about'? <p>Открыто из: страницы "О приложении"</p> : null }
     <Header title="Учёт доходов и расходов"/>
+    <PeriodFilter
+    dateFrom={dateFrom}
+    dateTo={dateTo}
+    periodPreset={periodPreset}
+    error={error}
+    setDateFrom={setDateFrom}
+    setDateTo={setDateTo}
+    setPeriodPreset={setPeriodPreset}
+    title={title}
+    />
     <BalanceDisplay 
       balance={balance}
       income={income}
       expense={expense}
     />
+
+    <AddTransaction/>
+
     {defaultFilters.category && (
       <div className="balance-container balance-category-container">
         <div className={`balance-total ${filteredBalance > 0 ? 'balance-positive' : ''} ${filteredBalance < 0 ? 'balance-negative' : ''} ${filteredBalance === 0 ? 'balance-zero' : ''}`}>
@@ -110,7 +143,7 @@ categories}: TransactionsPageProps) {
       transactions={transactions}
       sortedTransactions={readyTransactions}
       />
-      <AddTransaction/>
+      
     </div>
   )
 }

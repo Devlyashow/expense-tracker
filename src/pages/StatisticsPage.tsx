@@ -1,5 +1,5 @@
 import getCategoryStats from "../utils/getCategoryStats";
-import StatisticsFilters from "../components/StatisticsFilters";
+import PeriodFilter from "../components/PeriodFilter";
 import StatisticsChartCard from "../components/StatisticsChartCard";
 import type { Transaction, Category, PeriodPreset, CategoryType} from "../types";
 import { useState} from "react";
@@ -37,7 +37,7 @@ const expenseTransactionsCount = filteredTransactions.filter(t => t.amount < 0).
 
   return (
 <div className="statistics-page">
-  <StatisticsFilters
+  <PeriodFilter
   dateFrom={dateFrom}
   dateTo={dateTo}
   periodPreset={periodPreset}

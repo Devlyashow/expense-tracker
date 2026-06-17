@@ -14,7 +14,6 @@ function getReadyTransactions(transactions: Transaction[], selectedCategory: str
     const textA = a.text.toLowerCase()
     const textB = b.text.toLowerCase()
 
-
     const categoryObjA = categories.find((obj)=>obj.key===a.category)
     const categoryNameA = categoryObjA?.name ?? 'Неизвестная категория'
 
@@ -45,6 +44,7 @@ function getReadyTransactions(transactions: Transaction[], selectedCategory: str
   if (sortOption === "category-za") {
     return categoryB.localeCompare(categoryA)
   }
+  
   return b.id - a.id
 })
   return sortedTransactions

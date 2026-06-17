@@ -13,6 +13,8 @@ import TransactionsProvider from './context/TransactionsProvider'
 import {useEffect, useRef, useMemo, useState} from "react"
 import { Route, BrowserRouter as Router, Routes, NavLink, Navigate} from 'react-router-dom'
 import useExpenseTrackerData from './hooks/useExpenseTrackerData'
+import getLocalDateString from './utils/getLocalDateString'
+import type { PeriodPreset } from './types'
 
 
 export default function AuthenticatedApp({
@@ -35,16 +37,7 @@ export default function AuthenticatedApp({
     deleteTransaction,
   } = useExpenseTrackerData()
 
-  const {
-    selectedCategory,
-    setSelectedCategory,
-    searchTerm,
-    setSearchTerm,
-    sortOption,
-    setSortOption,
-    readyTransactions,
-    resetFilters,
-  } = useTransactionsFilters(transactions, categories)
+ 
 
 const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -72,10 +65,44 @@ useEffect(()=>{
   }
 }, [])
 
+// Фильтр периода
+const today = new Date()
+const year = today.getFullYear();
+const month = String(today.getMonth() + 1).padStart(2, '0');
+const firstDay = '01'; 
+const [periodPreset, setPeriodPreset] = useState<PeriodPreset>('month')
+const [dateFrom, setDateFrom] = useState(`${year}-${month}-${firstDay}`)
+const [dateTo, setDateTo] = useState(getLocalDateString(today))
+const title = dateFrom || dateTo
+  ? `Статистика за период с ${dateFrom || 'начала'} по ${dateTo || 'сегодня'}`
+  : 'Выберите период для отображения статистики'
+const isInvalidDateRange =
+   Boolean(dateFrom && dateTo && dateFrom > dateTo)
+const error = isInvalidDateRange ? 'Дата "от" не может быть больше даты "по"' : ''
+
+const transactionsByPeriod = useMemo(() => {
+  return transactions.filter((trans) => {
+    if (dateFrom && trans.date < dateFrom) return false
+    if (dateTo && trans.date > dateTo) return false
+    return true
+  })
+}, [transactions, dateFrom, dateTo])
+
+ const {
+    selectedCategory,
+    setSelectedCategory,
+    searchTerm,
+    setSearchTerm,
+    sortOption,
+    setSortOption,
+    readyTransactions,
+    resetFilters,
+  } = useTransactionsFilters(transactionsByPeriod, categories)
+
 // Подсчет расходов/доходов, баланса
 const totals = useMemo(()=>{
-  return getIncomeExpenseBalance(transactions)
-},[transactions])
+  return getIncomeExpenseBalance(transactionsByPeriod)
+},[transactionsByPeriod])
 // Готовый объект {доход, расход, общий баланс}
 const {income, expense, balance} = totals
 // Считаем отфильтрованныe значения
@@ -197,6 +224,14 @@ return (
           transactions={transactions}
           searchInputRef={searchInputRef}
           defaultFilters={defaultFilters}
+          dateFrom={dateFrom}
+          dateTo={dateTo}
+          periodPreset={periodPreset}
+          error={error}
+          setDateFrom={setDateFrom}
+          setDateTo={setDateTo}
+          setPeriodPreset={setPeriodPreset}
+          title={title}
         />}></Route>
         <Route path="/transaction" element={<Navigate to="/transactions" replace/>} />
         <Route path="/transaction/:transactionId/edit" element={<ChangeTransaction/>}/>
