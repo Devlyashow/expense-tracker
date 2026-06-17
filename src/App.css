@@ -752,6 +752,104 @@ button {
   margin: auto;
 }
 
+.transaction-form-card {
+  max-width: 900px;
+  margin: 24px auto;
+  padding: 24px;
+
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  background: linear-gradient(
+    180deg,
+    rgba(30, 41, 59, 0.95),
+    rgba(15, 23, 42, 0.95)
+  );
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  text-align: left;
+}
+
+.transaction-form-header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.transaction-form-badge {
+  display: inline-block;
+  margin: 0 0 10px;
+  padding: 4px 10px;
+
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.transaction-form-header h3 {
+  margin: 0 0 8px;
+  font-size: 1.35rem;
+}
+
+.transaction-form-description {
+  max-width: 620px;
+  margin: 0 auto;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.transaction-form {
+  width: 100%;
+}
+
+.transaction-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 20px;
+}
+
+.transaction-form-field {
+  align-items: stretch;
+  margin-bottom: 0;
+}
+
+.transaction-form-field label {
+  align-self: flex-start;
+  margin-bottom: 8px;
+  color: var(--text-main);
+  font-size: 0.9rem;
+}
+
+.transaction-form-field input,
+.transaction-form-field select {
+  width: 100%;
+}
+
+.transaction-form-submit {
+  display: block;
+  width: min(100%, 320px);
+  margin: 22px auto 0;
+  padding: 0.8rem 1.2rem;
+
+  border-radius: 999px;
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  background: rgba(56, 189, 248, 0.14);
+  color: var(--text-main);
+
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.transaction-form-submit:hover:not(:disabled) {
+  background: rgba(56, 189, 248, 0.22);
+  border-color: var(--accent);
+}
+
+.transaction-form-submit:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
 @media (max-width: 1024px) {
   .statistics-container {
     flex-direction: column;
@@ -801,8 +899,8 @@ button,
 /* Мобильная версия */
 @media (max-width: 900px) {
 
-  #root {
-    padding-top: 120px;
+    #root {
+    padding-top: 72px;
   }
 
   .statistics-container {
@@ -908,10 +1006,6 @@ button,
     white-space: nowrap;
   }
 
-  #root {
-    padding-top: 72px;
-  }
-
   .homePage_Expenses-Income,
   .categoryPage_income-expense,
   .aboutPageButtons {
@@ -992,7 +1086,23 @@ button,
   padding: 20px;
 }
 
+
+
 @media (max-width: 900px) {
+
+.transaction-form-card {
+  padding: 20px;
+  text-align: center;
+}
+
+.transaction-form-grid {
+  grid-template-columns: 1fr;
+}
+
+.transaction-form-field label {
+  align-self: center;
+}
+
   .page-hero {
     padding: 22px;
   }

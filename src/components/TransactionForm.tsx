@@ -3,8 +3,6 @@ import {useTransactionsContext} from '../context/useTransactionsContext'
 import type { Transaction,CreateTransactionData} from '../types'
 import {useBackToLastPage} from '../hooks/useBackToLastPage'
 
-
-type ModeType = 'create' | 'edit'
 type TransactionFormData = {
     id?: string;
     category: string;
@@ -156,68 +154,91 @@ category => category.key === formData.category
         }
 
   return (
-    <div>
-        {mode === 'create' && <h3>Добавить транзакцию</h3>}
-        {mode === 'edit' && <h3>Изменить транзакцию</h3>}
-        <form onSubmit={handleSubmit}>
-            <div className="form-control">
-                <label htmlFor="category">Категория</label>
-                <select
-                id="category"
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
-                ref={selectRef}>
-                    <option value="">Выберите категорию</option>
-                    {categories.map((obj)=>{
-                     return <option key={obj.id}  value={obj.key}>{obj.name}</option>
-                    })}
-                </select>
-                {categories.length === 0 && <p className="error">Добавьте категорию на странице с категориями</p>}
-                {error.category && <p className="error">{error.category}</p>}
-            </div>
+  <section className={`transaction-form-card transaction-form-card-${mode}`}>
+    <div className="transaction-form-header">
+      <p className="transaction-form-badge">
+        {mode === 'create' ? 'Новая операция' : 'Редактирование'}
+      </p>
 
-            <div className="form-control">
-                <label htmlFor="text">Название</label>
-                <input
-                id="text"
-                name="text"
-                type="text"
-                value={formData.text}
-                onChange={handleChange}
-                placeholder="Например: Зарплата"
-                />
-                {error.text && <p className="error">{error.text}</p>}
-            </div>
+      <h3>
+        {mode === 'create' ? 'Добавить транзакцию' : 'Изменить транзакцию'}
+      </h3>
 
-            <div className="form-control">
-                    <label htmlFor="amount">Сумма</label>
-                    <input
-                    id="amount"
-                    name="amount"
-                    type="number"
-                    value={formData.amount}
-                    onChange={handleChange}
-                    placeholder="Введите сумму"
-                    />
-                {error.amount && <p className="error">{error.amount}</p>}
-            </div>
-            <div className="form-control">
-                <label htmlFor="date">Дата</label>
-                <input
-                id='date'
-                name='date'
-                type='date'
-                value={formData.date}
-                onChange={handleChange}
-                />
-                {error.date && <p className="error">{error.date}</p>}
-            </div>
-                <button disabled={!isFormValid} type='submit'>
-                        { mode === 'create' ? 'Добавить транзакцию' : 'Сохранить изменения'}
-                </button>
-        </form>
-        
+      <p className="transaction-form-description">
+        Выберите категорию, укажите название, сумму и дату операции.
+      </p>
     </div>
+
+    <form className="transaction-form" onSubmit={handleSubmit}>
+      <div className="transaction-form-grid">
+        <div className="form-control transaction-form-field">
+          <label htmlFor="category">Категория</label>
+          <select
+            id="category"
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            ref={selectRef}
+          >
+            <option value="">Выберите категорию</option>
+            {categories.map((obj) => {
+              return <option key={obj.id} value={obj.key}>{obj.name}</option>
+            })}
+          </select>
+
+          {categories.length === 0 && (
+            <p className="error">Добавьте категорию на странице с категориями</p>
+          )}
+          {error.category && <p className="error">{error.category}</p>}
+        </div>
+
+        <div className="form-control transaction-form-field">
+          <label htmlFor="text">Название</label>
+          <input
+            id="text"
+            name="text"
+            type="text"
+            value={formData.text}
+            onChange={handleChange}
+            placeholder="Например: Зарплата"
+          />
+          {error.text && <p className="error">{error.text}</p>}
+        </div>
+
+        <div className="form-control transaction-form-field">
+          <label htmlFor="amount">Сумма</label>
+          <input
+            id="amount"
+            name="amount"
+            type="number"
+            value={formData.amount}
+            onChange={handleChange}
+            placeholder="Введите сумму"
+          />
+          {error.amount && <p className="error">{error.amount}</p>}
+        </div>
+
+        <div className="form-control transaction-form-field">
+          <label htmlFor="date">Дата</label>
+          <input
+            id="date"
+            name="date"
+            type="date"
+            value={formData.date}
+            onChange={handleChange}
+          />
+          {error.date && <p className="error">{error.date}</p>}
+        </div>
+      </div>
+
+      <button
+        className="transaction-form-submit"
+        disabled={!isFormValid}
+        type="submit"
+      >
+        {mode === 'create' ? 'Добавить транзакцию' : 'Сохранить изменения'}
+      </button>
+    </form>
+  </section>
   )
 }
