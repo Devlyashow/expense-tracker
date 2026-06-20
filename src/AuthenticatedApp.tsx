@@ -149,15 +149,19 @@ return (
     <Router>
         <div className="nav">
   <div className="nav-inner">
-    <button
-      type="button"
-      className="burger-button"
-      onClick={toggleMenu}
-      aria-label="Открыть меню"
-      aria-expanded={isMenuOpen}
-    >
-      ☰
-    </button>
+    <div className="burger-menu-control">
+      <span className="burger-label">Меню</span>
+
+      <button
+        type="button"
+        className="burger-button"
+        onClick={toggleMenu}
+        aria-label="Открыть меню"
+        aria-expanded={isMenuOpen}
+      >
+        ☰
+      </button>
+    </div>
 
     
 
