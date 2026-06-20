@@ -16,7 +16,7 @@ function TransactionList({title, transactions, sortedTransactions}: TransactionL
     return (
         <div>
             <h2>{title}</h2>
-            {transactions.length === 0 && <p>Транзакций пока нет. Добавьте первую транзакцию через форму ниже</p>}
+            {transactions.length === 0 && <p>Транзакций пока нет. Добавьте первую транзакцию через форму выше</p>}
             {(transactions.length !== 0 && sortedTransactions.length === 0) ?  <p>По вашему запросу ничего не найдено. Попробуйте изменить фильтр, поиск или сортировку</p> 
             : (
                 <div className="transactions-columns">
