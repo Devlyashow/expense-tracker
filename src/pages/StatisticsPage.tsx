@@ -3,6 +3,7 @@ import PeriodFilter from "../components/PeriodFilter";
 import StatisticsChartCard from "../components/StatisticsChartCard";
 import type { Transaction, Category, PeriodPreset, CategoryType} from "../types";
 import { useState} from "react";
+import ButtonsBottom from "../components/ButtonsBottom";
 
 type StatisticsPageProps = {
   transactions: Transaction[];
@@ -60,6 +61,6 @@ const expenseTransactionsCount = filteredTransactions.filter(t => t.amount < 0).
   incomeTransactionsCount={incomeTransactionsCount}
   expenseTransactionsCount={expenseTransactionsCount}
    />
-
+  <ButtonsBottom/>
 </div>
 )}

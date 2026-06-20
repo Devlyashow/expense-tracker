@@ -1,16 +1,7 @@
-import { Link, useNavigate } from 'react-router-dom'
+import ButtonsBottom from '../components/ButtonsBottom'
 
 
 export default function AboutPage() {
-  const navigate = useNavigate()
-
-  function goToTransactions() {
-    navigate('/transactions?from=about')
-  }
-
-  function backTolastPages() {
-    navigate(-1)
-  }
 
   return (
     <main className="about-page">
@@ -59,11 +50,7 @@ export default function AboutPage() {
         </article>
       </section>
 
-      <div className="aboutPageButtons">
-        <button onClick={backTolastPages}>Назад</button>
-        <Link to="/" className="buttonHomePage">На главную</Link>
-        <button onClick={goToTransactions}>К транзакциям</button>
-      </div>
+      <ButtonsBottom/>
     </main>
   )
 }

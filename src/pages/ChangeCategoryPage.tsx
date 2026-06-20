@@ -2,16 +2,17 @@
 import { useParams } from "react-router-dom"
 import {useTransactionsContext} from '../context/useTransactionsContext'
 import CategoryForm from "../components/CategoryForm"
-import type {Category,CategoryFormData} from '../types'
-import { useBackToLastPage } from "../hooks/useBackToLastPage"
+import type {Category,CategoryFormData,CategoryType} from '../types'
+import { useNavigateInApp } from "../hooks/useNavigateInApp"
 
 type ChangeCategoryPageProps = {
   editCategory: (updatedCategory: Category)=>void
+  fixedType?: CategoryType;
 }
 
-export default function ChangeCategoryPage({editCategory}:ChangeCategoryPageProps) {
+export default function ChangeCategoryPage({editCategory, fixedType}:ChangeCategoryPageProps) {
 
-const { backToLastPage } = useBackToLastPage()
+const { backToLastPage } = useNavigateInApp()
 const {categories, transactions} = useTransactionsContext()
 const { categoryId } = useParams()
 

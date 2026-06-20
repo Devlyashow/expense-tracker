@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import TransactionForm from '../components/TransactionForm'
 import { useTransactionsContext } from '../context/useTransactionsContext'   
-import {useBackToLastPage} from '../hooks/useBackToLastPage'
+import {useNavigateInApp} from '../hooks/useNavigateInApp'
 
 export default function ChangeTransaction() {
     
@@ -27,7 +27,7 @@ export default function ChangeTransaction() {
         date: transaction.date
     }
 
-    const { backToLastPage, goToHome } = useBackToLastPage()
+    const { backToLastPage, goToHome } = useNavigateInApp()
 
 
   return (

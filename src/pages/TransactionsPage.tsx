@@ -8,10 +8,12 @@ import TransactionSort from '../components/TransactionSort'
 import sortNames from '../constants/sortNames'
 import useTransactionsUrlSync from '../hooks/useTransactionsUrlSync'
 import PeriodFilter from "../components/PeriodFilter"
+import ButtonsBottom from "../components/ButtonsBottom"
 import type { Transaction, Category } from "../types"
 import type { Dispatch, SetStateAction, RefObject } from "react"
 import type { SortOption } from "../constants/sortNames"
 import type { PeriodPreset } from "../types"
+import { useNavigateInApp} from '../hooks/useNavigateInApp'
 
 type TransactionsPageProps = {
 balance: number,
@@ -82,13 +84,15 @@ setPeriodPreset
   setSortOption,
   sortNames
 })
-
-
+    const {goToCategories} = useNavigateInApp()
+  
   return (
     <div>
-    {from==='home'? <p>Открыто из: главной</p> : null }
-    {from==='about'? <p>Открыто из: страницы "О приложении"</p> : null }
     <Header title="Учёт доходов и расходов"/>
+    {categories.length === 0 && <div className="whenCategoriesZero">
+      <p className="error">Сначала нужно создать категории доходов и расходов</p>
+      <button type="button" onClick={goToCategories}>Создать категории</button>
+      </div>}
     <PeriodFilter
     dateFrom={dateFrom}
     dateTo={dateTo}
@@ -143,7 +147,9 @@ setPeriodPreset
       transactions={transactions}
       sortedTransactions={readyTransactions}
       />
-      
+      <ButtonsBottom
+      fromTransaction={true}
+      />
     </div>
   )
 }

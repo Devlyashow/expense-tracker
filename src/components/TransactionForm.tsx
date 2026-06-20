@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
 import {useTransactionsContext} from '../context/useTransactionsContext'
 import type { Transaction,CreateTransactionData} from '../types'
-import {useBackToLastPage} from '../hooks/useBackToLastPage'
+import {useNavigateInApp} from '../hooks/useNavigateInApp'
 
 type TransactionFormData = {
     id?: string;
@@ -40,7 +40,7 @@ type TransactionFormField = keyof TransactionFormErrors;
 
 export default function TransactionForm({ mode, onSubmit, initialData}: TransactionFormProps) {
     const {categories} = useTransactionsContext()
-    const {backToLastPage} = useBackToLastPage()
+    const {backToLastPage} = useNavigateInApp()
     const [formData, setFormData] = useState<TransactionFormData>(initialData)
     const [error, setError] = useState<TransactionFormErrors>({category: '',text: '',amount: '', date: ''})
     const selectedCategoryObject = categories.find(

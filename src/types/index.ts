@@ -6,7 +6,7 @@ export type Transaction = {
     date: string;
 };
 
-export type CategoryType = 'income' | 'expense';
+export type CategoryType = 'income' | 'expense' | null;
 export type CategoryFormMode = 'create' | 'edit'
 
 

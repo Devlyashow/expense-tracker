@@ -1,18 +1,17 @@
 import { useState } from 'react';
 import type {ChangeEvent, SubmitEvent } from 'react'
 import type {CategoryFormData, CategoryFormMode, CategoryType} from '../types'
-import { useBackToLastPage } from '../hooks/useBackToLastPage';
 
 type CategoryFormProps = {
   initialData: CategoryFormData;
   mode: CategoryFormMode;
   onSubmit: (data: CategoryFormData) => void;
   hasTransactionsWithThisCategory? : boolean;
+  isTypeFixed?: boolean
 }
 
-export default function CategoryForm({initialData, mode, onSubmit, hasTransactionsWithThisCategory}:CategoryFormProps)
+export default function CategoryForm({initialData, mode, onSubmit, hasTransactionsWithThisCategory, isTypeFixed}:CategoryFormProps)
 {
-    const {backToLastPage, goToHome} = useBackToLastPage()
     const [formData, setFormData] = useState<CategoryFormData>(initialData)
     const [error, setError] = useState('')
 
@@ -47,12 +46,13 @@ export default function CategoryForm({initialData, mode, onSubmit, hasTransactio
                 if (mode === 'create') {
                     setFormData({
                         text: '',
-                        incomeOrExpense: null
+                        incomeOrExpense: isTypeFixed ? formData.incomeOrExpense : null
                     })
                 }
             }
             const isCategoryTypeDisabled =
                 mode === 'edit' && Boolean(hasTransactionsWithThisCategory)
+
 
   return (
     <div className='categoryPage_form'>
@@ -76,7 +76,7 @@ export default function CategoryForm({initialData, mode, onSubmit, hasTransactio
                         type='radio' 
                         name='incomeOrExpense' 
                         value="income"
-                        disabled={isCategoryTypeDisabled}
+                        disabled={isCategoryTypeDisabled || isTypeFixed}
                         checked={formData.incomeOrExpense === 'income'}
                         onChange={handleChange}></input>
                     </label>
@@ -88,7 +88,7 @@ export default function CategoryForm({initialData, mode, onSubmit, hasTransactio
                         type='radio' 
                         name='incomeOrExpense' 
                         value="expense"
-                        disabled={isCategoryTypeDisabled}
+                        disabled={isCategoryTypeDisabled || isTypeFixed}
                         checked={formData.incomeOrExpense === 'expense'}
                         onChange={handleChange}></input>
                         </label>
@@ -100,8 +100,6 @@ export default function CategoryForm({initialData, mode, onSubmit, hasTransactio
                 )}
                 <button className='categoryPage_form_button'>{mode === 'create' ? 'Добавить категорию' : 'Обновить категорию'}</button>
                 <div className='aboutPageButtons'>
-                    <button onClick={backToLastPage}>Назад</button>
-                    <button onClick={goToHome}>На главную</button>
                 </div>
                 {error? <p className='error'>{error}</p> : null}
                 
