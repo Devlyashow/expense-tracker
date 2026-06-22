@@ -14,8 +14,15 @@ import {useEffect, useRef, useMemo, useState} from "react"
 import { Route, BrowserRouter as Router, Routes, NavLink, Navigate} from 'react-router-dom'
 import useExpenseTrackerData from './hooks/useExpenseTrackerData'
 import getLocalDateString from './utils/getLocalDateString'
-import type { PeriodPreset } from './types'
+import type { PeriodPreset, CreateTransactionData, CreateCategoryData, Transaction } from './types'
+import Toast from './components/Toast'
 
+type ToastType = 'success' | 'error' | 'info'
+
+type Toast = {
+  message: string
+  type: ToastType
+}
 
 export default function AuthenticatedApp({
   userEmail,
@@ -36,9 +43,8 @@ export default function AuthenticatedApp({
     editTransaction,
     deleteTransaction,
   } = useExpenseTrackerData()
-
  
-
+// Бургер меню открыто/закрыто
 const [isMenuOpen, setIsMenuOpen] = useState(false)
 
 function toggleMenu() {
@@ -48,6 +54,43 @@ function toggleMenu() {
 function closeMenu() {
   setIsMenuOpen(false)
 }
+
+// Toast уведомления
+const [toast, setToast] = useState<Toast | null>(null)
+
+function showToast(message: string, type: ToastType = 'info') {
+  setToast({
+    message,
+    type,
+  })
+}
+
+async function handleAddCategory(newCategory: CreateCategoryData) {
+  await addCategory(newCategory)
+  showToast('Категория добавлена', 'success')
+}
+
+async function handleDeleteCategory(id: string) {
+  await deleteCategory(id)
+  showToast('Категория удалена', 'success')
+}
+
+async function handleAddTransaction(newTransaction: CreateTransactionData) {
+  await addTransaction(newTransaction)
+  showToast('Транзакция добавлена', 'success')
+}
+
+async function handleEditTransaction(updatedTransaction: Transaction) {
+  await editTransaction(updatedTransaction)
+  showToast('Транзакция изменена', 'success')
+}
+
+async function handleDeleteTransaction(id: string) {
+  await deleteTransaction(id)
+  showToast('Транзакция удалена', 'success')
+}
+
+
 
 // ref к инпуту для фокуса на него
 const searchInputRef = useRef<HTMLInputElement | null>(null)
@@ -142,28 +185,25 @@ return (
   <TransactionsProvider
     transactions={transactions}
     categories={categories}
-    addTransaction={addTransaction}
-    editTransaction={editTransaction}
-    deleteTransaction={deleteTransaction}
+    addTransaction={handleAddTransaction}
+    editTransaction={handleEditTransaction}
+    deleteTransaction={handleDeleteTransaction}
   >
     <Router>
         <div className="nav">
-  <div className="nav-inner">
-    <div className="burger-menu-control">
-      <span className="burger-label">Меню</span>
-
-      <button
-        type="button"
-        className="burger-button"
-        onClick={toggleMenu}
-        aria-label="Открыть меню"
-        aria-expanded={isMenuOpen}
-      >
-        ☰
-      </button>
-    </div>
-
-    
+          <div className="nav-inner">
+            <div className="burger-menu-control">
+              <span className="burger-label">Меню</span>
+              <button
+                type="button"
+                className="burger-button"
+                onClick={toggleMenu}
+                aria-label="Открыть меню"
+                aria-expanded={isMenuOpen}
+              >
+                ☰
+              </button>
+            </div>
 
     <nav className={`nav-links ${isMenuOpen ? 'nav-links-open' : ''}`}>
       <NavLink to="/" end className={isActive} onClick={closeMenu}>
@@ -200,6 +240,15 @@ return (
     </nav>
   </div>
 </div>
+
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
+
       {dataLoading && <p>Загрузка данных...</p>}
       {dataError && <p className="error">Ошибка загрузки данных: {dataError}</p>}
       <Routes>
@@ -207,8 +256,8 @@ return (
         <Route path='/addCategories' element={<AddCategoryPage
           categories={categories}
           transactions={transactions}
-          deleteCategory={deleteCategory}
-          addCategory={addCategory}
+          deleteCategory={handleDeleteCategory}
+          addCategory={handleAddCategory}
         />}></Route>
         <Route path='/transactions' element={<TransactionsPage 
           balance={balance}
