@@ -43,6 +43,7 @@ export default function TransactionForm({ mode, onSubmit, initialData}: Transact
     const {backToLastPage} = useNavigateInApp()
     const [formData, setFormData] = useState<TransactionFormData>(initialData)
     const [error, setError] = useState<TransactionFormErrors>({category: '',text: '',amount: '', date: ''})
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
     const selectedCategoryObject = categories.find(
 category => category.key === formData.category
 )
@@ -74,7 +75,7 @@ category => category.key === formData.category
     }
 
     // Кнопка "добавить"
-    function handleSubmit (e: React.SubmitEvent<HTMLFormElement>) {
+    async function handleSubmit (e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault()
      const newErrors: TransactionFormErrors = {
     category: '',
@@ -110,26 +111,29 @@ category => category.key === formData.category
         const finalAmount = selectedCategoryObject.type === 'income'
   ? numericAmount
   : -numericAmount
+  
+            setIsSubmitting(true)
 
-        
-
-        if (mode === 'create') {
+            try {
+            
+            if (mode === 'create') {
             const newTransaction: CreateTransactionData = {
             category: formData.category,
             text: formData.text.trim(), 
             amount: finalAmount,
             date: formData.date
         }
-            onSubmit(newTransaction) 
-            setFormData({
-            category: '',
-            text: '',
-            amount: '',
-            date: ''
-        })
-            focusSelect()
-        }
+             await onSubmit(newTransaction) 
 
+            setFormData({
+                category: '',
+                text: '',
+                amount: '',
+                date: ''
+            })
+            focusSelect()   
+        }
+        
         if (mode === 'edit') {
             if (initialData.id === undefined) return
 
@@ -141,16 +145,22 @@ category => category.key === formData.category
                 amount: finalAmount,
                 date: formData.date
             }
-            onSubmit(updatedTransaction)
+            await onSubmit(updatedTransaction)
+
             backToLastPage?.()
         }
-        
             setError({
                 category: '',
                 text: '',
                 amount: '',
                 date: ''
             })
+            } catch (err) {
+                    if (err instanceof Error) {
+                        console.error(err.message)
+                    } else {
+                        console.error('Неизвестная ошибка')
+                    }} finally{setIsSubmitting(false)}
         }
 
   return (
@@ -179,6 +189,7 @@ category => category.key === formData.category
             value={formData.category}
             onChange={handleChange}
             ref={selectRef}
+            disabled={isSubmitting}
           >
             <option value="">Выберите категорию</option>
             {categories.map((obj) => {
@@ -201,6 +212,7 @@ category => category.key === formData.category
             value={formData.text}
             onChange={handleChange}
             placeholder="Например: Зарплата"
+            disabled={isSubmitting}
           />
           {error.text && <p className="error">{error.text}</p>}
         </div>
@@ -214,6 +226,7 @@ category => category.key === formData.category
             value={formData.amount}
             onChange={handleChange}
             placeholder="Введите сумму"
+            disabled={isSubmitting}
           />
           {error.amount && <p className="error">{error.amount}</p>}
         </div>
@@ -226,6 +239,7 @@ category => category.key === formData.category
             type="date"
             value={formData.date}
             onChange={handleChange}
+            disabled={isSubmitting}
           />
           {error.date && <p className="error">{error.date}</p>}
         </div>
@@ -233,10 +247,10 @@ category => category.key === formData.category
 
       <button
         className="transaction-form-submit"
-        disabled={!isFormValid}
+        disabled={!isFormValid || isSubmitting}
         type="submit"
       >
-        {mode === 'create' ? 'Добавить транзакцию' : 'Сохранить изменения'}
+        {isSubmitting ? 'Сохраняем...' : mode === 'create' ? 'Добавить транзакцию' : 'Сохранить изменения'}
       </button>
     </form>
   </section>

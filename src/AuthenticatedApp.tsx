@@ -14,7 +14,7 @@ import {useEffect, useRef, useMemo, useState} from "react"
 import { Route, BrowserRouter as Router, Routes, NavLink, Navigate} from 'react-router-dom'
 import useExpenseTrackerData from './hooks/useExpenseTrackerData'
 import getLocalDateString from './utils/getLocalDateString'
-import type { PeriodPreset, CreateTransactionData, CreateCategoryData, Transaction } from './types'
+import type { PeriodPreset, CreateTransactionData, CreateCategoryData, Transaction, Category } from './types'
 import Toast from './components/Toast'
 
 type ToastType = 'success' | 'error' | 'info'
@@ -66,31 +66,88 @@ function showToast(message: string, type: ToastType = 'info') {
 }
 
 async function handleAddCategory(newCategory: CreateCategoryData) {
-  await addCategory(newCategory)
-  showToast('Категория добавлена', 'success')
+  try {
+    await addCategory(newCategory)
+    showToast('Категория добавлена', 'success')
+  } catch (err) {
+                        showToast('Не удалось добавить категорию', 'error')
+
+                    if (err instanceof Error) {
+                        console.error(err.message) 
+                    } else {
+                        console.error('Неизвестная ошибка')
+                    }} 
+}
+
+async function handleEditCategory(category:Category) {
+  try {
+    await editCategory(category)
+    showToast('Категория изменена', 'success')
+  } catch (err) {
+                  showToast('Не удалось изменить категорию', 'error')
+        
+                  if (err instanceof Error) {
+                        console.error(err.message) 
+                    } else {
+                        console.error('Неизвестная ошибка')
+                    }
+  }
 }
 
 async function handleDeleteCategory(id: string) {
-  await deleteCategory(id)
+  try {
+    await deleteCategory(id)
   showToast('Категория удалена', 'success')
+  } catch (err) {
+                    showToast('Не удалось удалить категорию', 'error')
+
+                    if (err instanceof Error) {
+                        console.error(err.message) 
+                    } else {
+                        console.error('Неизвестная ошибка')
+                    }} 
 }
 
 async function handleAddTransaction(newTransaction: CreateTransactionData) {
-  await addTransaction(newTransaction)
+  try {
+    await addTransaction(newTransaction)
   showToast('Транзакция добавлена', 'success')
+  } catch (err) {
+                  showToast('Не удалось добавить транзакцию', 'error')
+
+                    if (err instanceof Error) {
+                        console.error(err.message) 
+                    } else {
+                        console.error('Неизвестная ошибка')
+                    }} 
 }
 
 async function handleEditTransaction(updatedTransaction: Transaction) {
-  await editTransaction(updatedTransaction)
+  try {
+    await editTransaction(updatedTransaction)
   showToast('Транзакция изменена', 'success')
-}
+} catch (err) {
+                    showToast('Не удалось изменить транзакцию', 'error')
 
+                    if (err instanceof Error) {
+                        console.error(err.message) 
+                    } else {
+                        console.error('Неизвестная ошибка')
+                    }} 
+}
 async function handleDeleteTransaction(id: string) {
-  await deleteTransaction(id)
+  try {
+    await deleteTransaction(id)
   showToast('Транзакция удалена', 'success')
+  } catch (err) {
+                  showToast('Не удалось удалить транзакцию', 'error')
+
+                    if (err instanceof Error) {
+                        console.error(err.message) 
+                    } else {
+                        console.error('Неизвестная ошибка')
+                    }} 
 }
-
-
 
 // ref к инпуту для фокуса на него
 const searchInputRef = useRef<HTMLInputElement | null>(null)
@@ -294,7 +351,7 @@ return (
         />} />
         <Route path='/about' element={<AboutPage />}></Route>
         <Route path='/category/:categoryId/edit' element={<ChangeCategoryPage
-        editCategory={editCategory}
+        editCategory={handleEditCategory}
         />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

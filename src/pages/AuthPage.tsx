@@ -14,6 +14,15 @@ export default function AuthPage({ authError, signUp, signIn }: AuthPageProps) {
   const [authMode, setAuthMode] = useState<AuthMode>('login')
   const [errorInput, setErrorInput] = useState('')
 
+async function handleDemoLogin() {
+  setErrorInput('')
+
+  await signIn(
+    'demo.expense.tracker@mail.com',
+    '470858Omg+'
+  )
+}
+
 async function handleSubmit() {
   setErrorInput('')
 
@@ -86,6 +95,24 @@ async function handleSubmit() {
       <button className='authButtonSingIn' type="button" onClick={handleSubmit}>
         {authMode === 'login' ? 'Войти' : 'Создать аккаунт'}
       </button>
+      {authMode === 'login' && (
+        <div className="demo-login-card">
+          <div>
+            <p className="demo-login-title">Быстро посмотреть проект?</p>
+            <p className="demo-login-text">
+              Войдите в демо-аккаунт без регистрации.
+            </p>
+          </div>
+
+          <button
+            className="demo-login-button"
+            type="button"
+            onClick={handleDemoLogin}
+          >
+            Демо
+          </button>
+        </div>
+      )}
       {authMode==='login'&&<div className='registrerOrlogin'><p>Нет аккаунта?</p> <button className='authButtonSingIn' type="button" onClick={() => {
         setAuthMode('register')
         setErrorInput('')

@@ -134,6 +134,57 @@ button {
   margin-right: 10px;
 }
 
+.demo-login-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  max-width: 420px;
+  margin: 18px auto 0;
+  padding: 10px 12px;
+
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  border-radius: 14px;
+  background: rgba(56, 189, 248, 0.08);
+  box-shadow: 0 10px 24px rgba(56, 189, 248, 0.08);
+
+  text-align: left;
+}
+
+.demo-login-title {
+  margin: 0 0 3px;
+  color: var(--text-main);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.demo-login-text {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.demo-login-button {
+  flex-shrink: 0;
+  padding: 8px 12px;
+
+  border-radius: 999px;
+  border: 1px solid rgba(56, 189, 248, 0.75);
+  background: rgba(56, 189, 248, 0.18);
+  color: var(--text-main);
+
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.demo-login-button:hover {
+  background: rgba(56, 189, 248, 0.28);
+  border-color: var(--accent);
+}
+
 .form-control {
   display: flex;
   flex-direction: column;
@@ -1239,6 +1290,16 @@ button,
 
 
 @media (max-width: 900px) {
+
+  .demo-login-card {
+  align-items: stretch;
+  flex-direction: column;
+  text-align: center;
+}
+
+.demo-login-button {
+  width: 100%;
+}
 
 .transaction-form-card {
   padding: 20px;
