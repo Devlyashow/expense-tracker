@@ -1421,7 +1421,7 @@ button,
   }
 }
 
-@media (hover: none) and (pointer: coarse) {
+@media (max-width: 1100px), (hover: none) and (pointer: coarse) {
   .nav {
     background-color: transparent !important;
     box-shadow: none;
@@ -1442,7 +1442,7 @@ button,
     gap: 8px;
     position: relative;
     z-index: 300;
-    pointer-events: auto;
+    pointer-events: auto !important;
   }
 
   .burger-button {
