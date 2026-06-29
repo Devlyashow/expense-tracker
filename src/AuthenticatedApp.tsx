@@ -11,7 +11,7 @@ import ChangeTransaction from './pages/ChangeTransaction'
 import ChangeCategoryPage from './pages/ChangeCategoryPage'
 import TransactionsProvider from './context/TransactionsProvider'
 import {useEffect, useRef, useMemo, useState} from "react"
-import { Route, BrowserRouter as Router, Routes, NavLink, Navigate} from 'react-router-dom'
+import { Route, Routes, NavLink, Navigate} from 'react-router-dom'
 import useExpenseTrackerData from './hooks/useExpenseTrackerData'
 import getLocalDateString from './utils/getLocalDateString'
 import type { PeriodPreset, CreateTransactionData, CreateCategoryData, Transaction, Category } from './types'
@@ -246,7 +246,6 @@ return (
     editTransaction={handleEditTransaction}
     deleteTransaction={handleDeleteTransaction}
   >
-    <Router>
         <div className="nav">
           <div className="nav-inner">
             <div className="burger-menu-control">
@@ -355,7 +354,6 @@ return (
         />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </Router>
   </TransactionsProvider>
   )
 }

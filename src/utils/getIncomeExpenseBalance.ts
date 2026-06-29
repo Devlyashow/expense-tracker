@@ -5,6 +5,7 @@ type BalanceSummary = {
     balance: number;
 }
 
+
 function getIncomeExpenseBalance(transactions: Transaction[]): BalanceSummary {
 // Складываем прибыль
 const income = transactions.filter((t)=>t.amount>0)

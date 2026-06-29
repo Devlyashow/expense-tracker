@@ -37,6 +37,34 @@ export default function useAuth() {
     }
   }, [])
 
+  async function resetPassword(email: string) {
+  setAuthError(null)
+
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${window.location.origin}/reset-password`,
+  })
+
+  if (error) {
+    setAuthError(error.message)
+    return false
+  }
+
+  return true
+}
+
+async function updatePassword(newPassword:string): Promise<boolean> {
+  setAuthError(null)
+  const { error } = await supabase.auth.updateUser({
+  password: newPassword,
+})
+    if (error) {
+    setAuthError(error.message)
+    return false
+  }
+
+  return true
+}
+
   async function signUp(email: string, password: string) {
     setAuthError(null)
 
@@ -80,5 +108,7 @@ export default function useAuth() {
     signUp,
     signIn,
     signOut,
+    resetPassword,
+    updatePassword
   }
 }

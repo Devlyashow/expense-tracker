@@ -1,5 +1,6 @@
 import { describe, test, expect } from 'vitest'
 import getIncomeExpenseBalance from './getIncomeExpenseBalance'
+import type { Transaction } from '../types'
 
 describe('getIncomeExpenseBalance', () => {
   test('correctly calculates income, expense and balance', () => {
@@ -51,7 +52,7 @@ describe('getIncomeExpenseBalance', () => {
       },
     ]
 
-            const transactions3 = [
+        const transactions3 = [
       {
         id: '1',
         category: 'food',
@@ -68,9 +69,12 @@ describe('getIncomeExpenseBalance', () => {
       },
     ]
 
+    const transactions4:Transaction[] = []
+
     const result = getIncomeExpenseBalance(transactions)
     const result2 = getIncomeExpenseBalance(transactions2)
     const result3 = getIncomeExpenseBalance(transactions3)
+    const result4 = getIncomeExpenseBalance(transactions4)
 
 
     expect(result).toEqual({
@@ -83,10 +87,15 @@ describe('getIncomeExpenseBalance', () => {
       expense: 0,
       balance: 1700,
     })
-        expect(result2).toEqual({
-      income: 1700,
+    expect(result3).toEqual({
+      income: 0,
+      expense: 800,
+      balance: -800,
+    })
+    expect(result4).toEqual({
+      income: 0,
       expense: 0,
-      balance: 1700,
+      balance: 0,
     })
   })
 })

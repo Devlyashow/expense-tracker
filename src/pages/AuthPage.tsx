@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 
 type AuthMode = 'login' | 'register'
 type AuthPageProps = {
@@ -75,6 +76,7 @@ async function handleSubmit() {
           onChange={event => setPassword(event.target.value)}
           placeholder="Введите пароль"
         />
+        <Link to="/reset-password">Забыли пароль?</Link>
         {errorInput && <p className="error">{errorInput}</p>}
       </div>
       {authMode === 'register' && (
