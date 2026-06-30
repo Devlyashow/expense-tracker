@@ -8,6 +8,10 @@ export default function useAuth() {
   const [authError, setAuthError] = useState<string | null>(null)
   const [isPasswordRecovery, setIsPasswordRecovery] = useState(false)
 
+    function resetPasswordRecoveryMode() {
+  setIsPasswordRecovery(false)
+}
+
   useEffect(() => {
     async function loadSession() {
       setAuthLoading(true)
@@ -65,7 +69,8 @@ async function updatePassword(newPassword:string): Promise<boolean> {
     setAuthError(error.message)
     return false
   }
-
+  setIsPasswordRecovery(false)
+  await supabase.auth.signOut()
   return true
 }
 
@@ -97,12 +102,13 @@ async function updatePassword(newPassword:string): Promise<boolean> {
 
   async function signOut() {
     setAuthError(null)
-
+    setIsPasswordRecovery(false)
     const { error } = await supabase.auth.signOut()
 
     if (error) {
       setAuthError(error.message)
     }
+    
   }
 
   return {
@@ -115,5 +121,6 @@ async function updatePassword(newPassword:string): Promise<boolean> {
     resetPassword,
     updatePassword,
     isPasswordRecovery,
+    resetPasswordRecoveryMode
   }
 }
