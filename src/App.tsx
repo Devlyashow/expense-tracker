@@ -14,6 +14,7 @@ const {
   signOut,
   resetPassword,
   updatePassword,
+  isPasswordRecovery,
 } = useAuth()
 
 if (authLoading) {
@@ -29,6 +30,7 @@ if (authLoading) {
           resetPassword={resetPassword}
           updatePassword={updatePassword}
           authError={authError}
+          isPasswordRecovery={isPasswordRecovery}
         />
       }
     />

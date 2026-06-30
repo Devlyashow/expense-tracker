@@ -5,9 +5,10 @@ type ResetPasswordPageProps = {
     resetPassword: (email: string) => Promise<boolean>
     updatePassword: (newPassword: string) => Promise<boolean>;
     authError: string | null
+    isPasswordRecovery: boolean
 }
 
-export default function ResetPasswordPage({resetPassword, updatePassword, authError}:ResetPasswordPageProps) {
+export default function ResetPasswordPage({resetPassword, updatePassword, authError, isPasswordRecovery}:ResetPasswordPageProps) {
 const [email, setEmail] = useState('')
 const [error, setError] = useState('')
 const [success, setSuccess] = useState(false)
@@ -16,8 +17,7 @@ const [newPassword, setNewPassword] = useState('')
 const [confirmPassword, setConfirmPassword] = useState('')
 const [passwordUpdated, setPasswordUpdated] = useState(false)
 
-const hasRecoveryToken =
-  window.location.hash.includes('access_token')
+const isSetNewPasswordMode = isPasswordRecovery
 
 async function handleSubmit() {
   setError('')
@@ -99,7 +99,7 @@ if (passwordUpdated) {
   )
 }
 
-if (hasRecoveryToken) {
+if (isSetNewPasswordMode) {
   return (
     <div>
       <h1>Новый пароль</h1>
