@@ -76,7 +76,7 @@ async function handleSubmit() {
           onChange={event => setPassword(event.target.value)}
           placeholder="Введите пароль"
         />
-        <Link to="/reset-password">Забыли пароль?</Link>
+        {authMode==='login'&&<Link to="/reset-password">Забыли пароль?</Link>}
         {errorInput && <p className="error">{errorInput}</p>}
       </div>
       {authMode === 'register' && (
