@@ -60,7 +60,7 @@ export default function useAuth() {
   return true
 }
 
-async function updatePassword(newPassword:string): Promise<boolean> {
+async function updatePassword(newPassword: string): Promise<boolean> {
   setAuthError(null)
   const { error } = await supabase.auth.updateUser({
   password: newPassword,
@@ -121,6 +121,5 @@ async function updatePassword(newPassword:string): Promise<boolean> {
     resetPassword,
     updatePassword,
     isPasswordRecovery,
-    resetPasswordRecoveryMode
   }
 }

@@ -4,6 +4,7 @@ export default function getCategoryStats(
     transactions: Transaction[],
     categories: Category[],
     categoryType: CategoryType): CategoryStatsItem[] {
+        
  if (categoryType === 'income') {
     const incomeTransactions = transactions.filter(t => t.amount > 0)
     const incomeCategories = categories.filter(c => c.type === 'income')

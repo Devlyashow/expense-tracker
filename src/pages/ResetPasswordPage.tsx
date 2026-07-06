@@ -57,6 +57,10 @@ async function handleUpdatePassword() {
         setError('Введите новый пароль')
         return
     }
+    if (newPassword.length < 6) {
+        setError('Пароль должен быть не короче 6 символов')
+        return
+    }
     if (confirmPassword.trim() === '') {
         setError('Повторите пароль')
         return
