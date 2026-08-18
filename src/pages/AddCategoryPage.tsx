@@ -9,6 +9,7 @@ import type {
 } from '../types';
 import CategoryForm from '../components/CategoryForm';
 import ButtonsBottom from '../components/ButtonsBottom'
+import createId from '../utils/createId'
 
 type AddCategoryPageProps = {
   categories: Category[];
@@ -39,7 +40,7 @@ export default function AddCategoryPage({categories, transactions, deleteCategor
   if (!activeCreateType) return
 
   const newCategory: CreateCategoryData = {
-    key: crypto.randomUUID(),
+    key: createId(),
     name: data.text,
     type: activeCreateType,
   }
