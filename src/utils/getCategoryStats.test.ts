@@ -79,14 +79,31 @@ test('calculates income category stats', () => {
   })
 
   test('calculates expense category stats', () => {
-    // ...
+   const result = getCategoryStats(transactions,categories, 'expense') 
+     expect(result).toEqual([
+  {
+      categoryKey: 'food',
+        name: 'food',
+        value: 200,
+        percent: 28.57,
+    },
+  {
+        categoryKey: 'transport',
+        name: 'transport',
+        value: 500,
+        percent: 71.43,
+    },
+  ]
+  )
   })
 
   test('excludes categories without transactions', () => {
-    // ...
+    const result = getCategoryStats(transactions,categories, 'income') 
+     expect(result.some(item => item.categoryKey === 'gifts')).toBe(false)
   })
 
   test('returns empty array when there are no matching transactions', () => {
-    // ...
+    const result = getCategoryStats([],categories, 'income') 
+     expect(result).toEqual([])
   })
 })
