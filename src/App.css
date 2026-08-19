@@ -1318,6 +1318,7 @@ button,
   .radio-option {
     font-size: 0.95rem;
   }
+
   h1 {
     font-size: 1.8rem;
   }
@@ -1335,9 +1336,13 @@ button,
     padding: 12px;
   }
 
-  .buttonHomePage,
-  button {
+  button,
+  .buttonHomePage {
     font-size: 0.9rem;
     padding: 0.55em 0.9em;
+  }
+
+  .buttonHomePage.edit-btn {
+    padding: 0;
   }
 }

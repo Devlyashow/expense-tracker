@@ -12,6 +12,22 @@
 
 ---
 
+## 📸 Screenshots
+
+### Auth & Demo Account
+
+![Auth and demo account](./docs/screenshots/auth-demo.png)
+
+| Transactions                                              | Statistics                                            |
+| --------------------------------------------------------- | ----------------------------------------------------- |
+| ![Transactions page](./docs/screenshots/transactions.png) | ![Statistics page](./docs/screenshots/statistics.png) |
+
+| Categories                                            | Mobile                                        |
+| ----------------------------------------------------- | --------------------------------------------- |
+| ![Categories page](./docs/screenshots/categories.png) | ![Mobile view](./docs/screenshots/mobile.png) |
+
+---
+
 ## 🛠 Tech Stack
 
 <p>
@@ -276,6 +292,7 @@ VITE_SUPABASE_PUBLISHABLE_KEY
 - [x] Бургер-меню
 - [x] Тёмная тема
 - [x] Unit tests для utility-функций
+- [x] GitHub Actions CI для автоматического запуска тестов и build
 - [x] Деплой на Vercel
 
 ---
@@ -288,7 +305,6 @@ VITE_SUPABASE_PUBLISHABLE_KEY
 - [ ] Цвета категорий
 - [ ] Расширенные тесты для hooks/components
 - [ ] Улучшение UX auth-страниц и reset password flow
-- [ ] Добавить screenshots в README
 
 ---
 
