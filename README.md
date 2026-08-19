@@ -18,13 +18,24 @@
 
 ![Auth and demo account](./docs/screenshots/auth-demo.png)
 
-| Transactions                                              | Statistics                                            |
-| --------------------------------------------------------- | ----------------------------------------------------- |
-| ![Transactions page](./docs/screenshots/transactions.png) | ![Statistics page](./docs/screenshots/statistics.png) |
-
-| Categories                                            | Mobile                                        |
-| ----------------------------------------------------- | --------------------------------------------- |
-| ![Categories page](./docs/screenshots/categories.png) | ![Mobile view](./docs/screenshots/mobile.png) |
+<table>
+  <tr>
+    <td width="65%" valign="top">
+      <h3 align="center">Transactions</h3>
+      <img src="./docs/screenshots/transactions.png" alt="Transactions page" />
+      <br />
+      <h3 align="center">Statistics</h3>
+      <img src="./docs/screenshots/statistics.png" alt="Statistics page" />
+      <br />
+      <h3 align="center">Categories</h3>
+      <img src="./docs/screenshots/categories.png" alt="Categories page" />
+    </td>
+    <td width="35%" valign="top">
+      <h3 align="center">Mobile</h3>
+      <img src="./docs/screenshots/mobile.png" alt="Mobile view" />
+    </td>
+  </tr>
+</table>
 
 ---
 
