@@ -30,9 +30,9 @@
       <h3 align="center">Categories</h3>
       <img src="./docs/screenshots/categories.png" alt="Categories page" />
     </td>
-    <td width="35%" valign="top">
-      <h3 align="center">Mobile</h3>
-      <img src="./docs/screenshots/mobile.png" alt="Mobile view" />
+    <td width="35%" valign="top" align="center">
+        <h3 align="center">Mobile</h3>
+        <img src="./docs/screenshots/mobile.png" alt="Mobile view" width="260" />
     </td>
   </tr>
 </table>
