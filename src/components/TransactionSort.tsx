@@ -8,7 +8,7 @@ type TransactionSortProps = {
 
 function TransactionSort({sortOption, setSortOption}: TransactionSortProps) {
     return (
-        <div className="form-control">
+      <div className="form-control">
         <label htmlFor="sort">Сортировка</label>
         <select
           id="sort"

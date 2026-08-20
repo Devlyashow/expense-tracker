@@ -45,7 +45,7 @@ function getReadyTransactions(transactions: Transaction[], selectedCategory: str
     return categoryB.localeCompare(categoryA)
   }
   
-  return b.id - a.id
+  return b.date.localeCompare(a.date)
 })
   return sortedTransactions
 }
